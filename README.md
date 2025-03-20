@@ -20,30 +20,73 @@ It is designed for content creators and gamers that empowers users with Web3-nat
 - **Smart Contracts**: Cairo (StarkNet).
 - **Storage**: IPFS/Filecoin integration for decentralized content storage.
 
-## 🔧 Installation & Setup
-
-To set up the project locally:
-
-```bash
-# Clone the repository
-git clone https://github.com/StreamFi-x/streamfi-frontend.git
-cd streamfi
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-```
-
-If you encounter installation issues, try these steps:
+## Installation
+### Running with MakeFile
 
 ```bash
-npm cache clean --force
-rm -rf node_modules
-rm package-lock.json
-npm install
+make clean
 ```
+
+This command will remove the build folder and the .dart_tool folder.
+
+```bash
+make build
+```
+
+This command will build the project.
+
+```bash
+make run
+```
+
+Generate all freezed files and generated files
+
+```bash
+make gen
+```
+
+### Running with Flutter Commands
+
+```bash
+flutter clean
+```
+
+This command will remove the build folder and the .dart_tool folder.
+
+```bash
+flutter build apk
+```
+
+This command will build the project.
+
+```bash
+flutter run
+```
+
+Generate all freezed files and generated files
+
+```bash
+flutter pub run build_runner build
+```
+
+## Testing
+
+```bash
+flutter test
+```
+
+This command will run all the tests in the test folder.
+
+```bash
+flutter test --coverage
+```
+
+This command will run all the tests using the makefile
+
+```bash
+make test
+```
+
 
 ## 🛠 Branch Naming Convention
 
