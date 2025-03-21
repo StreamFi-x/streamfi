@@ -37,4 +37,11 @@ class AppColors {
   static const Color white250 = Color(0xFFFAFAFA);
   static const Color gradientColor = Color(0xFFEDEAFF);
   static const Color white = Colors.white;
+
+  // Verification Dialog Colors
+  static const Color dialogBackground = Color.fromRGBO(28, 28, 28, 1);
+  static const Color pinBoxBackground = Color.fromRGBO(0, 0, 0, 0.25);
+  static const Color verifyButtonPurple = Color.fromRGBO(90, 24, 154, 1);
+  static const Color pinBoxBorderPurple = Color.fromRGBO(90, 24, 154, 1);
+  static const Color instructionTextGrey = Color(0xFF9E9E9E);
 }
