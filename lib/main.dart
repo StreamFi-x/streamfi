@@ -11,7 +11,7 @@ class StreamFiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'StreamFi Setting',
+      title: 'StreamFi Settings',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
