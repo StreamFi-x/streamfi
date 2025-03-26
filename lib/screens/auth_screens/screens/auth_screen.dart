@@ -247,7 +247,6 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void showWalletSelectionDialog(BuildContext context) {
-    // ;
     showDialog(
       context: context,
       builder: (context) {
