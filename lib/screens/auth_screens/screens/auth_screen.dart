@@ -32,37 +32,35 @@ class _AuthScreenState extends State<AuthScreen> {
       backgroundColor: AppColors.primaryBackgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.primaryBackgroundColor,
-        leading: isTablet 
-          ? null 
-          : Builder(
-              builder: (BuildContext context) {
-                return GestureDetector(
-                  onTap: (){
-                    Scaffold.of(context).openDrawer();
-                  },
-                  child: SvgPicture.asset(
-                      AppAssets.hamburger
-                  ),
-                );
-              },
-            ),
-        title: SvgPicture.asset(
-            AppAssets.streamFi
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: AppColors.purpleColor,
-                  borderRadius: BorderRadius.circular(7.0)
+        leading: isTablet
+            ? null
+            : Builder(
+                builder: (BuildContext context) {
+                  return GestureDetector(
+                    onTap: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    child: SvgPicture.asset(AppAssets.hamburger),
+                  );
+                },
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Connect',
-                  style: TextStyle(
-                      color: AppColors.white
+        title: SvgPicture.asset(AppAssets.streamFi),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              showWalletSelectionDialog(context);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: AppColors.purpleColor,
+                    borderRadius: BorderRadius.circular(7.0)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Connect',
+                    style: TextStyle(color: AppColors.white),
                   ),
                 ),
               ),
@@ -72,30 +70,32 @@ class _AuthScreenState extends State<AuthScreen> {
         automaticallyImplyLeading: false,
       ),
       drawer: isTablet ? null : _buildDrawer(context, isTablet),
-      body: isTablet 
-        ? Row(
-            children: [
-              // Permanent drawer for tablet
-              SizedBox(
-                width: 280, // Standard drawer width
-                child: _buildDrawer(context, isTablet, closeDrawerOnTap: false),
-              ),
-              // Vertical divider
-              Container(
-                width: 1,
-                color: AppColors.selectedDrawer,
-              ),
-              // Main content
-              Expanded(
-                child: Column(),
-              ),
-            ],
-          )
-        : Column(),
+      body: isTablet
+          ? Row(
+              children: [
+                // Permanent drawer for tablet
+                SizedBox(
+                  width: 280, // Standard drawer width
+                  child:
+                      _buildDrawer(context, isTablet, closeDrawerOnTap: false),
+                ),
+                // Vertical divider
+                Container(
+                  width: 1,
+                  color: AppColors.selectedDrawer,
+                ),
+                // Main content
+                Expanded(
+                  child: Column(),
+                ),
+              ],
+            )
+          : Column(),
     );
   }
 
-  Widget _buildDrawer(BuildContext context, bool isTablet, {bool closeDrawerOnTap = true}) {
+  Widget _buildDrawer(BuildContext context, bool isTablet,
+      {bool closeDrawerOnTap = true}) {
     return Drawer(
       backgroundColor: AppColors.primaryBackgroundColor,
       child: ListView(
@@ -113,13 +113,11 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                             color: AppColors.grey500.withOpacity(0.18),
-                            borderRadius: BorderRadius.circular(7.0)
-                        ),
+                            borderRadius: BorderRadius.circular(7.0)),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                          child: SvgPicture.asset(
-                              AppAssets.cancelIcon
-                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                          child: SvgPicture.asset(AppAssets.cancelIcon),
                         ),
                       ),
                     )
@@ -150,41 +148,37 @@ class _AuthScreenState extends State<AuthScreen> {
             },
           ),
           DrawerItem(
-            icon: AppAssets.trendingIcon,
-            title: 'Trending',
-            isSelected: _selectedIndex == 1,
-            onTap: () {
-              _onItemTapped(1);
-              if (closeDrawerOnTap) Navigator.pop(context);
-            }
-          ),
+              icon: AppAssets.trendingIcon,
+              title: 'Trending',
+              isSelected: _selectedIndex == 1,
+              onTap: () {
+                _onItemTapped(1);
+                if (closeDrawerOnTap) Navigator.pop(context);
+              }),
           DrawerItem(
-            icon: AppAssets.watchLaterIcon,
-            title: 'Watch Later',
-            isSelected: _selectedIndex == 2,
-            onTap: () {
-              _onItemTapped(2);
-              if (closeDrawerOnTap) Navigator.pop(context);
-            }
-          ),
+              icon: AppAssets.watchLaterIcon,
+              title: 'Watch Later',
+              isSelected: _selectedIndex == 2,
+              onTap: () {
+                _onItemTapped(2);
+                if (closeDrawerOnTap) Navigator.pop(context);
+              }),
           DrawerItem(
-            icon: AppAssets.liveIcon,
-            title: 'Live',
-            isSelected: _selectedIndex == 3,
-            onTap: () {
-              _onItemTapped(3);
-              if (closeDrawerOnTap) Navigator.pop(context);
-            }
-          ),
+              icon: AppAssets.liveIcon,
+              title: 'Live',
+              isSelected: _selectedIndex == 3,
+              onTap: () {
+                _onItemTapped(3);
+                if (closeDrawerOnTap) Navigator.pop(context);
+              }),
           DrawerItem(
-            icon: AppAssets.favouriteIcon,
-            title: 'Saved Videos',
-            isSelected: _selectedIndex == 4,
-            onTap: () {
-              _onItemTapped(4);
-              if (closeDrawerOnTap) Navigator.pop(context);
-            }
-          ),
+              icon: AppAssets.favouriteIcon,
+              title: 'Saved Videos',
+              isSelected: _selectedIndex == 4,
+              onTap: () {
+                _onItemTapped(4);
+                if (closeDrawerOnTap) Navigator.pop(context);
+              }),
           SizedBox(
             height: 20,
           ),
@@ -198,10 +192,10 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Text('RECOMMENDED',
-              style: TextStyle(
-                  color: Colors.white
-              ),),
+            child: Text(
+              'RECOMMENDED',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           SizedBox(
             height: 20,
@@ -242,13 +236,111 @@ class _AuthScreenState extends State<AuthScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: PrimaryButton(
-                onTaps: (){},
+                onTaps: () {},
                 height: 34,
                 buttonTitle: 'See more',
-                colors: Colors.white.withOpacity(0.30)
-            ),
+                colors: Colors.white.withOpacity(0.30)),
           )
         ],
+      ),
+    );
+  }
+
+  void showWalletSelectionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Color(0xff0F0F0F),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: Icon(Icons.close, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+              Text(
+                'Select a wallet',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Securely authenticate & start streaming with full ownership over your earnings.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                ),
+              ),
+              SizedBox(height: 20),
+              _walletOption(
+                context,
+                icon: 'assets/images/meta_mask.png',
+                label: 'Metamask',
+                onTap: () {},
+              ),
+              Divider(
+                color: Colors.grey,
+              ),
+              _walletOption(
+                context,
+                icon: 'assets/images/wallet_connect.png',
+                label: 'WalletConnect',
+                onTap: () {},
+              ),
+              Divider(
+                color: Colors.grey,
+              ),
+              _walletOption(
+                context,
+                icon: 'assets/images/argent.png',
+                label: 'Argent',
+                onTap: () {},
+              ),
+              Divider(
+                color: Colors.grey,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _walletOption(
+    BuildContext context, {
+    required String icon,
+    required String label,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          children: [
+            Image.asset(icon, width: 24, height: 24),
+            SizedBox(width: 12),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
