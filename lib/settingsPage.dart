@@ -11,6 +11,8 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  bool emailNotificationEnabled = false;
+  bool twoFactorAuthEnabled = false;
   final TextEditingController nameController =
       TextEditingController(text: 'Casssyy');
   final TextEditingController emailController =
@@ -46,16 +48,20 @@ class _SettingsPageState extends State<SettingsPage>
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
-          'Settings',
-          style: GoogleFonts.roboto(
-            fontSize: isTablet ? 32 : 20,
-            fontWeight: FontWeight.w800,
-            height: isTablet ? 40 / 32 : 40 / 20,
-            letterSpacing: 0,
-            color: Color(0xffFFFFFF),
+        title: Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            'Settings',
+            style: TextStyle(
+              fontSize: isTablet ? 32 : 20,
+              fontWeight: FontWeight.w800,
+              height: isTablet ? 40 / 32 : 40 / 20,
+              letterSpacing: 0,
+              color: Color(0xffFFFFFF),
+              fontFamily: 'PPN'
+            ),
+            textAlign: TextAlign.left,
           ),
-          textAlign: TextAlign.left,
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
@@ -68,7 +74,7 @@ class _SettingsPageState extends State<SettingsPage>
                 border: const Border(
                   bottom: BorderSide(
                     color: Color(0xFF9147FF),
-                    width: 4.0, // Increased thickness
+                    width: 4.0,
                   ),
                 ),
               ),
@@ -105,21 +111,192 @@ class _SettingsPageState extends State<SettingsPage>
           controller: tabController,
           children: [
             buildProfileTab(isTablet),
-            const Center(child: Text('Account Settings')),
+            buildAccountTab(isTablet),
             const Center(child: Text('Privacy and Security Settings')),
             const Center(child: Text('Notification Settings')),
           ],
         ),
+
       ),
     );
   }
+  Widget buildAccountTab(bool isTablet) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            horizontal: isTablet ? constraints.maxWidth * 0.05 : 16,
+            vertical: 20,
+          ),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth:  double.infinity,
+              ),
+              child: Column(
 
+        crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 30,),
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 34,
+                      bottom: 34,
+                    ),
+                    width: isTablet?1055:342,
+                    height: 127,
+
+
+                    decoration: BoxDecoration(
+                      color: Colors.grey[900],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildSwitchRow(
+                          'Email Notification',
+                          emailNotificationEnabled,
+                              (value) {
+                            setState(() {
+                              emailNotificationEnabled = value;
+                            });
+                          },
+                        ),
+
+                        const SizedBox(height: 10),
+
+
+                        buildSwitchRow(
+                          'Two-Factor Authentication (2FA)',
+                          twoFactorAuthEnabled,
+                              (value) {
+                            setState(() {
+                              twoFactorAuthEnabled = value;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: EdgeInsets.only(left: isTablet?790:210),
+                    child: Container(
+                      padding: EdgeInsets.only(left: 14,right: 14,top: 8,bottom: 8),
+                      height: 36,
+                      width: 130,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Color(0xff5A189A),
+                        border: Border.all(
+                          color: Color(0xff5A189A),
+                          width: 1
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x0D0A0D12),
+                            offset: Offset(0, 1),
+                            blurRadius: 2
+                          )
+                        ]
+                      ),
+
+
+                      child: Center(
+                        child: Text(
+                          'Save Changes',
+                          style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            height: 20 / 14,
+                            letterSpacing: 0,
+                            color: Color(0xffFFFFFF),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget buildSwitchRow(
+      String label,
+      bool currentValue,
+      ValueChanged<bool> onChanged,
+
+
+      ) {
+    final isTablet = MediaQuery.of(context).size.width > 600;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.inter(
+              fontSize: isTablet?18:14,
+              fontWeight: isTablet?FontWeight.w700:FontWeight.w600,
+              color: Color(0xffFFFFFF),
+              height: 18/14
+          ),
+        ),
+       Container(
+
+         decoration: BoxDecoration(
+           color: Color(0x66000000), borderRadius: BorderRadius.circular(1000),
+
+         ),
+          width: 40,
+          height: 20,
+
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 40),
+              child: SizedBox(
+                width: 20,
+                height: 20,
+                child: Switch(
+                  value: currentValue,
+                  onChanged: onChanged,
+                  activeColor: Color(0xFF9147FF),
+                  activeTrackColor: Color(0xFF9147FF).withOpacity(0.5),
+                  inactiveTrackColor: Colors.grey[800],
+                  inactiveThumbColor: Colors.white,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  thumbColor: WidgetStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return Color(0xFF9147FF);
+                    }
+                    return Colors.grey[800]!;
+                  }),
+                  trackColor: WidgetStateProperty.all<Color>(Colors.transparent),
+
+
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
   Widget buildProfileTab(bool isTablet) {
 
     return LayoutBuilder(builder: (context, constraints) {
       return SingleChildScrollView(
         padding: EdgeInsets.symmetric(
-          horizontal: isTablet ? constraints.maxWidth * 0.1 : 16,
+          horizontal: isTablet ? constraints.maxWidth * 0.05 : 16,
           vertical: 20,
         ),
         child: Center(
@@ -342,7 +519,7 @@ class _SettingsPageState extends State<SettingsPage>
 
 
 
-                // Save Changes button
+
                 Align(
                   alignment: Alignment.centerRight,
                   child: Container(
