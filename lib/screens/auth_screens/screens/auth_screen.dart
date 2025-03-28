@@ -4,6 +4,7 @@ import 'package:streamfi/core/constants/assets.dart';
 import 'package:streamfi/core/themes/color_scheme.dart';
 import 'package:streamfi/screens/auth_screens/widgets/base_search.dart';
 import 'package:streamfi/screens/widgets/button/primary_button.dart';
+import 'package:streamfi/core/shared/dialogs/email_verification_dialog.dart';
 
 import '../widgets/drawer_item.dart';
 import '../widgets/recommended_item.dart';
@@ -236,7 +237,23 @@ class _AuthScreenState extends State<AuthScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: PrimaryButton(
-                onTaps: () {},
+                onTaps: () {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => EmailVerificationDialog(
+                      email: "user@example.com", // Replace with actual user email
+                      onVerify: (code) {
+                        // Handle verification logic here
+                        print("Verification code: $code");
+                      },
+                      onResend: () {
+                        // Handle resend logic here
+                        print("Resend code requested");
+                      },
+                    ),
+                  );
+                },
                 height: 34,
                 buttonTitle: 'See more',
                 colors: Colors.white.withOpacity(0.30)),

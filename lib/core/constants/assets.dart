@@ -13,6 +13,7 @@ class AppAssets {
   static String watchLaterIcon = '${defifundrIconPath}watch_later.svg';
   static String cancelIcon = '${defifundrIconPath}cancel_icon.svg';
   static String searchIcon = '${defifundrIconPath}search.svg';
+  static String checkIcon = '${defifundrIconPath}check.svg';
 
   //-------------------------------------------- IMAGES -------------------------------------------- //
   static const defifundrImagePath = 'assets/images/';

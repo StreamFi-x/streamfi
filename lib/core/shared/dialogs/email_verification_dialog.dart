@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:streamfi/core/constants/app_texts.dart';
 import 'package:streamfi/core/themes/color_scheme.dart';
+import 'package:streamfi/core/shared/dialogs/verification_success_dialog.dart';
 
 class EmailVerificationDialog extends StatefulWidget {
   final String email;
@@ -239,6 +240,23 @@ class _EmailVerificationDialogState extends State<EmailVerificationDialog> {
     final code = controllers.map((controller) => controller.text).join();
     if (code.length == 6) {
       widget.onVerify(code);
+      // Close the current dialog
+      Navigator.of(context).pop();
+      
+      // Show the success dialog
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => VerificationSuccessDialog(
+          onContinue: () {
+            Navigator.of(context).pop();
+          },
+          onGoToDashboard: () {
+            Navigator.of(context).pop();
+            // TODO: Navigate to dashboard
+          },
+        ),
+      );
     }
   }
 } 
