@@ -45,4 +45,5 @@ class AppColors {
   static const Color verifyButtonPurple = Color.fromRGBO(90, 24, 154, 1);
   static const Color pinBoxBorderPurple = Color.fromRGBO(90, 24, 154, 1);
   static const Color instructionTextGrey = Color(0xFF9E9E9E);
+  static const Color descriptionText = Color(0xFFD9D9D9);
 }
