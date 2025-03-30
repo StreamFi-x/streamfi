@@ -96,6 +96,101 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Widget _buildDrawer(BuildContext context, bool isTablet,
       {bool closeDrawerOnTap = true}) {
+  Widget customTextField({
+    required String label,
+    required String hint,
+    bool isMultiline = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: TextStyle(color: Color(0xffD9D9D9))),
+        SizedBox(height: 5),
+        TextField(
+          maxLines: isMultiline ? 3 : 1,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.grey[800],
+            hintText: hint,
+            hintStyle: TextStyle(color: Colors.white60),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+        ),
+        SizedBox(height: 15),
+      ],
+    );
+  }
+
+  void showProfileDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            double dialogWidth =
+                constraints.maxWidth > 600 ? 500 : constraints.maxWidth * 0.9;
+
+            return AlertDialog(
+              backgroundColor: Color(0xff1C1C1C),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              title: Text(
+                "Complete Your Profile",
+                style: TextStyle(
+                    color: Color(0xff5A189A),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24),
+              ),
+              content: Container(
+                width: dialogWidth,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Set up your profile to get the best experience on StreamFi",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 20),
+                    customTextField(
+                        label: "Display Name", hint: "Chidinma Cassandra"),
+                    customTextField(
+                        label: "Email Address",
+                        hint: "Enter a valid email address"),
+                    customTextField(
+                        label: "Bio (optional)",
+                        hint: "Tell your audience a bit about yourself",
+                        isMultiline: true),
+                  ],
+                ),
+              ),
+              actions: [
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff5A189A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child:
+                        Text("Confirm", style: TextStyle(color: Colors.white)),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildDrawer(BuildContext context, bool isTablet,
+      {bool closeDrawerOnTap = true}) {
     return Drawer(
       backgroundColor: AppColors.primaryBackgroundColor,
       child: ListView(
@@ -341,6 +436,9 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ],
         ),
+                colors: Colors.white.withOpacity(0.30)),
+          )
+        ],
       ),
     );
   }
