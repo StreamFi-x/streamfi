@@ -48,7 +48,8 @@ class _AuthScreenState extends State<AuthScreen> {
         actions: [
           GestureDetector(
             onTap: () {
-              showWalletSelectionDialog(context);
+              // showWalletSelectionDialog(context);
+              showProfileDialog(context);
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
@@ -94,8 +95,6 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  Widget _buildDrawer(BuildContext context, bool isTablet,
-      {bool closeDrawerOnTap = true}) {
   Widget customTextField({
     required String label,
     required String hint,
@@ -110,7 +109,7 @@ class _AuthScreenState extends State<AuthScreen> {
           maxLines: isMultiline ? 3 : 1,
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.grey[800],
+            fillColor: Colors.grey[900],
             hintText: hint,
             hintStyle: TextStyle(color: Colors.white60),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
@@ -131,7 +130,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 constraints.maxWidth > 600 ? 500 : constraints.maxWidth * 0.9;
 
             return AlertDialog(
-              backgroundColor: Color(0xff1C1C1C),
+              backgroundColor: Color(0xff0F0F0F),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)),
               title: Text(
@@ -436,9 +435,6 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ],
         ),
-                colors: Colors.white.withOpacity(0.30)),
-          )
-        ],
       ),
     );
   }
