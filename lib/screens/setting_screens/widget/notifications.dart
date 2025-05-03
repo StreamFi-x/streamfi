@@ -1,14 +1,15 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {
-  const NotificationSettingsScreen({Key? key}) : super(key: key);
+  const NotificationSettingsScreen({super.key});
 
   @override
   State<NotificationSettingsScreen> createState() => _NotificationSettingsScreenState();
 }
 
 class _NotificationSettingsScreenState extends State<NotificationSettingsScreen> {
-  // State variables for checkboxes
   bool newFollowers = true;
   bool mentionsReplies = false;
   bool liveStreamAlerts = false;
@@ -47,7 +48,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
               radius: 18,
               child: ClipOval(
                 child: Image.asset(
-                  'assets/profile.png', // Replace with actual profile image path
+                  'assets/profile.png',
                   errorBuilder: (context, error, stackTrace) => const Icon(
                     Icons.person,
                     color: Colors.white,
@@ -60,7 +61,6 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       ),
       body: Column(
         children: [
-          // Tab navigation
           SizedBox(
             height: 50,
             child: Row(
@@ -136,7 +136,6 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                         ),
                       ),
                       const SizedBox(height: 16),
-                      // General notification checkboxes
                       buildCheckbox('New Followers', newFollowers, (value) {
                         setState(() => newFollowers = value!);
                       }),
@@ -233,28 +232,6 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           ),
         ],
       ),
-    );
-  }
-}
-
-// Main application for testing
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'StreamVibe Notifications',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
-      ),
-      home: const NotificationSettingsScreen(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
