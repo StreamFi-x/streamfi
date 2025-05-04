@@ -14,6 +14,7 @@ class AppAssets {
   static String cancelIcon = '${defifundrIconPath}cancel_icon.svg';
   static String searchIcon = '${defifundrIconPath}search.svg';
   static String checkIcon = '${defifundrIconPath}check.svg';
+  static String streamfiOnb = '${defifundrImagePath}streamfiOnb.svg';
 
   //-------------------------------------------- IMAGES -------------------------------------------- //
   static const defifundrImagePath = 'assets/images/';
@@ -21,4 +22,5 @@ class AppAssets {
   static String people = '${defifundrImagePath}people.png';
   static String live = '${defifundrImagePath}live.png';
   static String dummyAvi = '${defifundrImagePath}dummy_avi.png';
+  static String onb = '${defifundrImagePath}onb.png';
 }

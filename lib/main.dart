@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:streamfi/screens/onboarding/onboarding.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'screens/splash_screen.dart';
 
@@ -11,15 +13,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'StreamFi',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF22A4F5)),
-        useMaterial3: true,
-      ),
-      home: SplashScreen(
-        nextScreen: const HomePage(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      child: MaterialApp(
+        title: 'StreamFi',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF22A4F5)),
+          useMaterial3: true,
+        ),
+        home: SplashScreen(
+          nextScreen: const OnboardingScreen(),
+        ),
       ),
     );
   }
