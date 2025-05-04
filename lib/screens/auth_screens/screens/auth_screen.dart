@@ -336,7 +336,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     context: context,
                     barrierDismissible: false,
                     builder: (context) => EmailVerificationDialog(
-                      email: "user@example.com", // Replace with actual user email
+                      email:
+                          "user@example.com", // Replace with actual user email
                       onVerify: (code) {
                         // Handle verification logic here
                         print("Verification code: $code");
